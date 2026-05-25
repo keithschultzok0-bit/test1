@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>验证页面</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        .captcha-box {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .captcha-img {
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 8px;
+            color: #333;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            user-select: none;
+        }
+        input {
+            padding: 15px;
+            font-size: 18px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            letter-spacing: 4px;
+            outline: none;
+        }
+        button {
+            padding: 15px 40px;
+            font-size: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .result {
+            display: none;
+            animation: fadeIn 0.8s ease;
+        }
+        .result h1 { font-size: 28px; color: #333; margin-bottom: 20px; }
+        .result .emoji { font-size: 80px; margin: 20px 0; animation: bounce 1s infinite; }
+        .result .message { font-size: 22px; color: #667eea; font-weight: bold; line-height: 1.8; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="captcha-box" id="captchaBox">
+            <h2 style="color: #333; margin-bottom: 10px;">请输入验证码</h2>
+            <div class="captcha-img">好好学习</div>
+            <input type="text" id="captchaInput" placeholder="输入验证码" maxlength="4">
+            <button onclick="verify()">验证</button>
+        </div>
+        <div class="result" id="result">
+            <h1>验证通过！</h1>
+            <div class="emoji">📚</div>
+            <div class="message">
+                何佳怡<br>别看了<br>回去好好学习 😄
+            </div>
+        </div>
+    </div>
+    <script>
+        function verify() {
+            document.getElementById('captchaBox').style.display = 'none';
+            document.getElementById('result').style.display = 'block';
+        }
+        document.getElementById('captchaInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') verify();
+        });
+    </script>
+</body>
+</html>
